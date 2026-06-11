@@ -9,7 +9,7 @@ import {
 import { PrismaSessionStorage } from "@shopify/shopify-app-session-storage-prisma";
 import prisma from "./db.server";
 
-const TOML_CLIENT_ID = "REPLACE_WITH_YOUR_CLIENT_ID";
+const TOML_CLIENT_ID = "55917f3a052d82408b772526edc8ccae";
 const DEFAULT_APP_URL = "https://smart-upsell-bundle-builder-production.up.railway.app";
 const envApiKey = process.env.SHOPIFY_API_KEY;
 const scopes = (process.env.SCOPES || "")
