@@ -1,7 +1,7 @@
 # Learn more about configuring your app at https://shopify.dev/docs/apps/tools/cli/configuration
 
 client_id = "55917f3a052d82408b772526edc8ccae"
-application_url = "https://smart-upsell-bundle-builder-production.up.railway.app"
+application_url = "https://smartupsell-production.up.railway.app"
 embedded = true
 name = "Smart Upsell & Bundle Builder"
 
@@ -9,7 +9,7 @@ name = "Smart Upsell & Bundle Builder"
 scopes = "read_products,write_products,read_orders,read_customers"
 
 [auth]
-redirect_urls = [ "https://smart-upsell-bundle-builder-production.up.railway.app/auth/callback" ]
+redirect_urls = [ "https://smartupsell-production.up.railway.app/auth/callback" ]
 
 [webhooks]
 api_version = "2026-07"
