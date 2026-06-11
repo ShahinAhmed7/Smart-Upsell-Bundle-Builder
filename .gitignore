@@ -1,0 +1,10 @@
+node_modules
+build
+.react-router
+node_modules/.cache
+.env
+.env.local
+prisma/dev.sqlite
+prisma/dev.sqlite-journal
+.DS_Store
+*.log

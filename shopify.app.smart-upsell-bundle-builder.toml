@@ -1,0 +1,30 @@
+# Learn more about configuring your app at https://shopify.dev/docs/apps/tools/cli/configuration
+
+client_id = "REPLACE_WITH_YOUR_CLIENT_ID"
+application_url = "https://smart-upsell-bundle-builder-production.up.railway.app"
+embedded = true
+name = "Smart Upsell & Bundle Builder"
+
+[access_scopes]
+scopes = "read_products,write_products,read_orders,read_cart,write_cart,read_customer"
+
+[auth]
+redirect_urls = [ "https://smart-upsell-bundle-builder-production.up.railway.app/auth/callback" ]
+
+[webhooks]
+api_version = "2026-07"
+
+  [[webhooks.subscriptions]]
+  uri = "/webhooks/app/uninstalled"
+  topics = [ "app/uninstalled" ]
+
+  [[webhooks.subscriptions]]
+  uri = "/webhooks/app/scopes_update"
+  topics = [ "app/scopes_update" ]
+
+  [[webhooks.subscriptions]]
+  uri = "/webhooks"
+  compliance_topics = [ "customers/data_request", "customers/redact", "shop/redact" ]
+
+[build]
+automatically_update_urls_on_dev = false

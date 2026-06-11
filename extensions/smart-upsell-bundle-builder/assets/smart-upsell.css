@@ -1,0 +1,140 @@
+.smart-upsell-widget {
+  margin: 24px 0;
+  padding: 20px;
+  border: 1px solid #e1e3e5;
+  border-radius: 8px;
+  background: #ffffff;
+  font-family: inherit;
+}
+
+.smart-upsell-widget__title {
+  margin: 0 0 16px;
+  font-size: 18px;
+  font-weight: 700;
+  color: #202223;
+}
+
+.smart-upsell-widget__savings {
+  display: inline-block;
+  margin-left: 8px;
+  padding: 2px 8px;
+  background: #e3f1df;
+  color: #005c3f;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.smart-upsell-widget__products {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.smart-upsell-widget__product {
+  display: flex;
+  flex-direction: column;
+  padding: 12px;
+  border: 1px solid #e1e3e5;
+  border-radius: 8px;
+  background: #ffffff;
+  cursor: pointer;
+  transition: border-color 0.15s ease;
+}
+
+.smart-upsell-widget__product:hover {
+  border-color: #008060;
+}
+
+.smart-upsell-widget__product.is-selected {
+  border-color: #008060;
+  border-width: 2px;
+  background: #f0f9f4;
+}
+
+.smart-upsell-widget__product-image {
+  width: 100%;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 6px;
+  margin-bottom: 8px;
+}
+
+.smart-upsell-widget__product-title {
+  font-size: 13px;
+  font-weight: 600;
+  color: #202223;
+  margin: 0 0 4px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+.smart-upsell-widget__product-price {
+  font-size: 13px;
+  color: #5c5f62;
+}
+
+.smart-upsell-widget__total {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 0;
+  border-top: 1px solid #e1e3e5;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.smart-upsell-widget__button {
+  width: 100%;
+  padding: 12px;
+  background: #008060;
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: 12px;
+}
+
+.smart-upsell-widget__button:hover {
+  filter: brightness(0.94);
+}
+
+.smart-upsell-widget__button:disabled {
+  background: #babfc3;
+  cursor: not-allowed;
+}
+
+.smart-upsell-widget__volume {
+  background: #fff8e6;
+  border: 1px solid #ffcf8b;
+  border-radius: 8px;
+  padding: 16px;
+  margin: 16px 0;
+}
+
+.smart-upsell-widget__progress {
+  height: 8px;
+  background: #f1f1f1;
+  border-radius: 4px;
+  overflow: hidden;
+  margin: 8px 0;
+}
+
+.smart-upsell-widget__progress-bar {
+  height: 100%;
+  background: #008060;
+  transition: width 0.3s ease;
+}
+
+.smart-upsell-widget__progress-text {
+  font-size: 13px;
+  color: #7c4a00;
+  margin: 0;
+  font-weight: 600;
+}

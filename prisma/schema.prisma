@@ -1,0 +1,154 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:dev.sqlite"
+}
+
+model Session {
+  id            String    @id
+  shop          String
+  state         String
+  isOnline      Boolean   @default(false)
+  scope         String?
+  expires       DateTime?
+  accessToken   String
+  userId        BigInt?
+  firstName     String?
+  lastName      String?
+  email         String?
+  accountOwner  Boolean   @default(false)
+  locale        String?
+  collaborator  Boolean?  @default(false)
+  emailVerified Boolean?  @default(false)
+  refreshToken        String?
+  refreshTokenExpires DateTime?
+}
+
+model ShopSettings {
+  id                String   @id @default(cuid())
+  shop              String   @unique
+
+  // Widget display settings
+  enableFBT         Boolean  @default(true)
+  enableBundles     Boolean  @default(true)
+  enableVolume      Boolean  @default(true)
+  enableCartUpsell  Boolean  @default(false) // Pro only
+
+  // FBT Widget settings
+  fbtTitle          String   @default("Frequently Bought Together")
+  fbtMaxProducts    Int      @default(4)
+  fbtShowSavings    Boolean  @default(true)
+
+  // Bundle settings
+  bundleTitle       String   @default("Build Your Bundle")
+  bundleMaxItems    Int      @default(6)
+
+  // Volume discount settings
+  volumeTiers       String   @default("[{\"quantity\":2,\"discount\":10},{\"quantity\":3,\"discount\":15},{\"quantity\":5,\"discount\":20}]")
+
+  // Cart upsell settings
+  cartUpsellTitle   String   @default("You might also like")
+
+  // Colors
+  primaryColor      String   @default("#008060")
+  textColor         String   @default("#202223")
+  backgroundColor   String   @default("#ffffff")
+  borderRadius      Int      @default(8)
+
+  updatedAt         DateTime @updatedAt
+  createdAt         DateTime @default(now())
+}
+
+model Bundle {
+  id              String   @id @default(cuid())
+  shop            String
+  name            String
+  description     String?
+  type            String   @default("fixed") // "fixed" or "custom" (build your own)
+  status          String   @default("active") // "active" or "draft"
+
+  // For fixed bundles
+  products        String   @default("[]") // JSON array of {productId, variantId, quantity}
+
+  // For custom bundles (build your own)
+  minItems        Int      @default(2)
+  maxItems        Int      @default(5)
+
+  // Pricing
+  discountType    String   @default("percentage") // "percentage" or "fixed"
+  discountValue   Float    @default(0)
+
+  // Display
+  imageUrl        String?
+  displayPosition String   @default("product_page") // "product_page", "cart_drawer", "home_page"
+
+  // Tiers for custom bundles
+  tiers           String   @default("[]") // JSON array of {minItems, price} or {minItems, discount}
+
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  @@index([shop, status])
+}
+
+model VolumeDiscount {
+  id              String   @id @default(cuid())
+  shop            String
+  name            String
+  status          String   @default("active")
+
+  // Product selection
+  productIds      String   @default("[]") // JSON array of product IDs (empty = all)
+  collectionIds   String   @default("[]") // JSON array of collection IDs
+
+  // Tiers: [{quantity: 2, discount: 10, type: "percentage"}]
+  tiers           String   @default("[]")
+
+  // Display
+  title           String   @default("Volume Discount")
+  message         String   @default("Buy {quantity} items, get {discount}% off!")
+
+  // Product page widget
+  showProgressBar Boolean  @default(true)
+  showBadge       Boolean  @default(true)
+
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  @@index([shop, status])
+}
+
+model FrequentlyBoughtTogether {
+  id              String   @id @default(cuid())
+  shop            String
+  productId       String
+  relatedProducts String   @default("[]") // JSON array of {productId, weight}
+  source          String   @default("manual") // "manual", "auto", "ai"
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  @@unique([shop, productId])
+  @@index([shop])
+}
+
+model CartUpsell {
+  id              String   @id @default(cuid())
+  shop            String
+  name            String
+  status          String   @default("active")
+  triggerType     String   @default("all") // "all", "specific_products", "specific_collections"
+  triggerProducts String   @default("[]") // JSON array of product IDs
+  upsellProducts  String   @default("[]") // JSON array of {productId, discount?}
+  title           String   @default("Complete your order")
+  message         String   @default("Add this for just $X more")
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  @@index([shop, status])
+}

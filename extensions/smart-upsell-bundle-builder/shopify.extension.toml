@@ -1,0 +1,12 @@
+name = "smart-upsell-bundle-builder"
+type = "theme"
+uid = "REPLACE_WITH_GENERATED_UID"
+
+[[extensions]]
+type = "theme_app_extension"
+name = "Smart Upsell Widget"
+handle = "smart-upsell-widget"
+
+  [extensions.capabilities]
+  network_access = true
+  theme_access = true

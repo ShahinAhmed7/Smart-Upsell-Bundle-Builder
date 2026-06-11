@@ -1,0 +1,26 @@
+{% comment %} Smart Upsell & Bundle Builder - App Embed {% endcomment %}
+{% if product %}
+  <div
+    id="smart-upsell-widget"
+    data-shop="{{ shop.domain }}"
+    data-product-id="{{ product.id }}"
+    data-product-handle="{{ product.handle }}"
+    data-product-title="{{ product.title | escape }}"
+    data-product-price="{{ product.price | json }}"
+    data-product-image="{{ product.featured_image | image_url: width: 160 | json }}"
+    data-product-available="{{ product.available | json }}"
+    data-product-variants="{{ product.variants | json }}"
+    hidden
+  ></div>
+
+  {{ 'smart-upsell.css' | asset_url | stylesheet_tag }}
+  <script src="{{ 'smart-upsell.js' | asset_url }}" defer></script>
+{% endif %}
+
+{% schema %}
+{
+  "name": "Smart Upsell Widget",
+  "target": "body",
+  "settings": []
+}
+{% endschema %}
